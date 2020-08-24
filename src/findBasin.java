@@ -25,8 +25,10 @@ public class findBasin{
 	}
    
    public static void main(String[] args) throws FileNotFoundException{
+      PrintStream outputOne = new PrintStream(new File(args[1]));
+      PrintStream outputTwo = System.out;
       //Reading in text file
-      Scanner line = new Scanner(new BufferedReader(new FileReader("large_in.txt")));
+      Scanner line = new Scanner(new BufferedReader(new FileReader(args[0])));
                 
       String[] dimensions = line.nextLine().trim().split(" ");
       rows = Integer.parseInt(dimensions[0]);
@@ -47,8 +49,15 @@ public class findBasin{
       tick();
       basinFind(terrain, isBasin);
       float time = tock();
-      printBasins(); 
-      System.out.println("Run took "+ time +" seconds");
+      
+      if(args.length.equals(2)){ 
+      	printBasins();
+      }
+      
+      if(args.length.equals(1)){ 
+      	System.setOut(outputTwo);
+      	System.out.println("Run took "+ time +" seconds");
+      }
       
    }
    

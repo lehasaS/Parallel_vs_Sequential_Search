@@ -18,25 +18,7 @@ public class terrainBasin {
 	}
         
    public static void makeGrid() throws FileNotFoundException{
-      //Reading in text file
-      Scanner line = new Scanner(new BufferedReader(new FileReader("large_in.txt")));
-                
-      String[] dimensions = line.nextLine().trim().split(" ");
-      rows = Integer.parseInt(dimensions[0]);
-      columns = Integer.parseInt(dimensions[1]);
-                
-      terrain = new float[rows][columns];
-      isBasin = new int[rows][columns];
-      String[] dataSet = line.nextLine().split(" ");
-		
-		int arrayCounter=0;
-		for(int i=0; i<rows; i++){
-		  for(int j=0; j<columns; j++){
-			  terrain[i][j] = Float.parseFloat(dataSet[arrayCounter]);
-			  isBasin[i][j] = 0;
-			  arrayCounter++;
-		  }
-		}
+
   
    }
 
@@ -72,12 +54,42 @@ public class terrainBasin {
     }
 
     public static void main(String[] args) throws Exception {
-        makeGrid();
-        tick();
-	neighbours(terrain);
-        float time = tock();
-        print();
-        System.out.println("Run took "+ time +" seconds");
+    	PrintStream outputOne = new PrintStream(new File(args[1]));
+    	PrintStream outputTwo = System.out;
+    	
+      //Reading in text file
+      Scanner line = new Scanner(new BufferedReader(new FileReader(arg[0])));
+                
+      String[] dimensions = line.nextLine().trim().split(" ");
+      rows = Integer.parseInt(dimensions[0]);
+      columns = Integer.parseInt(dimensions[1]);
+                
+      terrain = new float[rows][columns];
+      isBasin = new int[rows][columns];
+      String[] dataSet = line.nextLine().split(" ");
+		
+      int arrayCounter=0;
+      for(int i=0; i<rows; i++){
+	for(int j=0; j<columns; j++){
+	   terrain[i][j] = Float.parseFloat(dataSet[arrayCounter]);
+	   isBasin[i][j] = 0;
+	   arrayCounter++;
+	}
+      }
+
+      tick();
+      neighbours(terrain);
+      float time = tock();
+      
+      if(args.length.equals(2)){ 
+      	System.setOut(outputOne);
+      	print();
+      }
+      
+      if(args.length.equals(1)){
+      	System.setOut(outputTwo);
+      	System.out.println("Run took "+ time +" seconds");
+      }
     }
 
 }
