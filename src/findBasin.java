@@ -25,8 +25,6 @@ public class findBasin{
 	}
    
    public static void main(String[] args) throws FileNotFoundException{
-      PrintStream outputOne = new PrintStream(new File(args[1]));
-      PrintStream outputTwo = System.out;
       //Reading in text file
       Scanner line = new Scanner(new BufferedReader(new FileReader(args[0])));
                 
@@ -50,12 +48,11 @@ public class findBasin{
       basinFind(terrain, isBasin);
       float time = tock();
       
-      if(args.length.equals(2)){ 
+      if(args.length==2){
+      	PrintStream outputOne = new PrintStream(new File(args[1])); 
+      	System.setOut(outputOne);
       	printBasins();
-      }
-      
-      if(args.length.equals(1)){ 
-      	System.setOut(outputTwo);
+      }else if(args.length==1){
       	System.out.println("Run took "+ time +" seconds");
       }
       

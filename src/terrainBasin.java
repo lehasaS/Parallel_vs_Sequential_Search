@@ -54,11 +54,8 @@ public class terrainBasin {
     }
 
     public static void main(String[] args) throws Exception {
-    	PrintStream outputOne = new PrintStream(new File(args[1]));
-    	PrintStream outputTwo = System.out;
-    	
-      //Reading in text file
-      Scanner line = new Scanner(new BufferedReader(new FileReader(arg[0])));
+    //Reading in text file
+      Scanner line = new Scanner(new BufferedReader(new FileReader(args[0])));
                 
       String[] dimensions = line.nextLine().trim().split(" ");
       rows = Integer.parseInt(dimensions[0]);
@@ -81,13 +78,11 @@ public class terrainBasin {
       neighbours(terrain);
       float time = tock();
       
-      if(args.length.equals(2)){ 
+      if(args.length==2){
+      	PrintStream outputOne = new PrintStream(new File(args[1]));
       	System.setOut(outputOne);
       	print();
-      }
-      
-      if(args.length.equals(1)){
-      	System.setOut(outputTwo);
+      }else if(args.length==1){
       	System.out.println("Run took "+ time +" seconds");
       }
     }
