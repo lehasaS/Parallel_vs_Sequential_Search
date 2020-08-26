@@ -3,19 +3,29 @@ import java.util.ArrayList;
 
 public class basinSearch extends RecursiveAction{
      int lo; // arguments
-	  int hi;
-	  float[][] terrain;
+     int hi;
+     float[][] terrain;
      int[][] isBasin;
-	  static final int SEQUENTIAL_CUTOFF=556;
+     static final int SEQUENTIAL_CUTOFF=950;
      static String basins;
-	    
-	  basinSearch(float[][] t,int l, int h, int[][] b){ 
-	    this.lo=l; 
+	
+    /**
+     * This is the constructor
+     * @param float[][] arrayName
+     * @param int variableName
+     * @param int variableName
+     * @param int[][] arrayName
+     */    
+    basinSearch(float[][] t,int l, int h, int[][] b){ 
+       this.lo=l; 
        this.hi=h; 
        this.terrain=t;
        this.isBasin=b;
-	  }
+    }
      
+     /**
+     * This function overrides compute in RecursiveAction and does the parallel implementation of finding a basin
+     */
      protected void compute(){
       if((hi-lo) < SEQUENTIAL_CUTOFF){
          float currentValue;
